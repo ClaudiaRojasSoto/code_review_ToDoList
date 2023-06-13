@@ -95,11 +95,27 @@ taskForm.addEventListener('submit', handleAddTask);
 
 const enterIcon = document.querySelector('.icon-container');
 
-enterIcon.addEventListener('click', handleAddTask);
+enterIcon.addEventListener('click', (event) => {
+  event.preventDefault();
+  const taskDescription = taskInput.value.trim();
+  if (taskDescription !== '') {
+    tasks = addTask(tasks, taskDescription);
+    taskInput.value = '';
+    renderTasks();
+    saveTasks(tasks);
+  }
+});
 
 enterIcon.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
-    handleAddTask(event);
+    event.preventDefault();
+    const taskDescription = taskInput.value.trim();
+    if (taskDescription !== '') {
+      tasks = addTask(tasks, taskDescription);
+      taskInput.value = '';
+      renderTasks();
+      saveTasks(tasks);
+    }
   }
 });
 
